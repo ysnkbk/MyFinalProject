@@ -23,10 +23,7 @@ namespace Business.Concrete
 
         }
 
-        public List<Product> GetAllByCategoryId(int id)
-        {
-            return _productDal.GetAll(p => p.CategoryId == id);
-        }
+     
 
         public List<Product> GetByUnitPrice(decimal min, decimal max)
         {
@@ -34,9 +31,14 @@ namespace Business.Concrete
 
         }
 
-        List<Category> IProductService.GetAllByCategoryId(int id)
+        public List<Category> GetAllByCategoryId(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public List<Product> GetAllByUnitsInStock(short min, short max)
+        {
+            return _productDal.GetAll(p=>p.UnitsInStock>=min && p.UnitsInStock<max);
         }
     }
 }
