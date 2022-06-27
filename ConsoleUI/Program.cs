@@ -20,13 +20,13 @@ namespace ConsoleUI
             //IoC
             //Data Transformation Object==dto
             ICategoryService categoryService = new CategoryManager(new EfCategoryDal());
-            var result = categoryService.GetAll();
+            var result = categoryService.GetAll().Data;
             foreach (var value in result)
             {
                 Console.WriteLine(value.CategoryId);
 
             }
-            IProductService productService = new ProductManager(new EfProductDal());
+            IProductService productService = new ProductManager(new EfProductDal(),new CategoryManager(new EfCategoryDal()));
             var result1 = productService.GetAll();
             foreach (var item in result1.Data)
             {
@@ -39,7 +39,7 @@ namespace ConsoleUI
         private static void CategoryTest()
         {
             CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
-            foreach (var category in categoryManager.GetAll())
+            foreach (var category in categoryManager.GetAll().Data )
             {
                 Console.WriteLine(category.CategoryName);
 
